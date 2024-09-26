@@ -1,0 +1,44 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <!--Step 1 display registration form-->
+    <view-state id="showRegistrationForm" view="registration/register" model="register">
+        <transition on="next" to="validateUser"/>
+    </view-state>
+
+    <!--Step 2- Valiodate the submission form-->
+    <action-state id=" validateUser">
+        <evaluate expression ="registrationService.validateUser(flowScope.user)"/>
+            <transition on="success" to="saveUser"/>
+            <transition on="error" to="showRegistrationForm"/>
+    </action-state>
+
+<!--    additional verify the user (email/phone)-->
+    <subflow-state id="verifyUser" subflow ="userVerificationFlow">
+        <output name = "verificationResult" value="flowScope.verificationResult"/>
+        <transition on="success" to="saveUser"/>
+        <transition on="error" to="showRegistrationForm"/>
+    </subflow-state>
+
+    <decison-state id ="checkUserExistence">
+        <if test ="registrationService.isUserExists(flowScope.user)"
+            then ="showAlreadyRegistred"
+            else="saveUser"/>
+    </decison-state>
+
+
+    <!--Step 3 -save the form-->
+    <action-state id="saveUser">
+        <evaluate expression ="registrationService.saveUser(flowScope.user)"/>
+        <transition on="success" to="registrationSuccess"/>
+        <transition on="error" to="showRegistrationForm"/>
+    </action-state>
+
+
+    <!--Step 4 -display the success-->
+    <end-state id="registrationSuccess" view="registration/thankYou"/>
+</flow>
+
+

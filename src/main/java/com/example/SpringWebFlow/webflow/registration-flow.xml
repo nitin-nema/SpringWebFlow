@@ -1,0 +1,23 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <!-- Step 1: Collect Personal Details -->
+    <view-state id="personalDetails" view="registration/personalDetails" model="user">
+        <transition on="next" to="contactDetails"/>
+    </view-state>
+
+    <!-- Step 2: Collect Contact Details -->
+    <view-state id="contactDetails" view="registration/contactDetails" model="user">
+        <transition on="next" to="review"/>
+    </view-state>
+
+    <!-- Step 3: Review User Details -->
+    <view-state id="review" view="registration/review" model="user">
+        <transition on="confirm" to="complete"/>
+    </view-state>
+
+    <!-- Flow End: Display a Thank You Page -->
+    <end-state id="complete" view="registration/thankYou"/>
+</flow>

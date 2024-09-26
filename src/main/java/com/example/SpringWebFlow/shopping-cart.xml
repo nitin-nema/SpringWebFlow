@@ -1,0 +1,15 @@
+<flow id="shoppingCart" persistence="client">
+    <view-state id="productSelection" view="cart/productSelection">
+        <transition on="next" to="shippingDetails"/>
+    </view-state>
+
+    <view-state id="shippingDetails" view="cart/shippingDetails">
+        <transition on="next" to="paymentDetails"/>
+    </view-state>
+
+    <view-state id="paymentDetails" view="cart/paymentDetails">
+        <transition on="submit" to="orderConfirmation"/>
+    </view-state>
+
+    <end-state id="orderConfirmation" view="cart/thankYou"/>
+</flow>

@@ -1,0 +1,15 @@
+<flow id="orderFlow">
+    <view-state id="productSelection" view="order/productSelection">
+        <transition on="next" to="shippingDetails"/>
+    </view-state>
+
+    <view-state id="shippingDetails" view="order/shippingDetails">
+        <transition on="next" to="reviewOrder"/>
+    </view-state>
+
+    <view-state id="reviewOrder" view="order/reviewOrder">
+        <transition on="placeOrder" to="finishOrder"/>
+    </view-state>
+
+    <end-state id="finishOrder" view="order/thankYou"/>
+</flow>

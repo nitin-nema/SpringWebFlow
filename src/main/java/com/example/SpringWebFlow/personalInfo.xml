@@ -1,0 +1,23 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <!-- Step 1: User enters personal details -->
+    <view-state id="personalInfo" view="personalInfo" model="user">
+        <transition on="next" to="addressInfo"/>
+    </view-state>
+
+    <!-- Step 2: User enters address details -->
+    <view-state id="addressInfo" view="addressInfo" model="user">
+        <transition on="next" to="review"/>
+    </view-state>
+
+    <!-- Step 3: Review user input -->
+    <view-state id="review" view="review" model="user">
+        <transition on="confirm" to="finish"/>
+    </view-state>
+
+    <!-- Step 4: Complete the flow -->
+    <end-state id="finish" view="thankYou"/>
+</flow>

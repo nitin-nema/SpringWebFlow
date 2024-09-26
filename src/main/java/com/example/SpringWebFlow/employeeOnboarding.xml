@@ -1,0 +1,15 @@
+<flow id="employeeOnboarding">
+    <view-state id="personalDetails" view="employee/personalDetails">
+        <transition on="next" to="jobDetails"/>
+    </view-state>
+
+    <view-state id="jobDetails" view="employee/jobDetails">
+        <transition on="next" to="confirmation"/>
+    </view-state>
+
+    <view-state id="confirmation" view="employee/confirmation">
+        <transition on="submit" to="end"/>
+    </view-state>
+
+    <end-state id="end" view="employee/success"/>
+</flow>

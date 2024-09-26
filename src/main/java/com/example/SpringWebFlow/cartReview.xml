@@ -1,0 +1,17 @@
+<view-state id="cartReview" view="checkout/cart">
+    <transition on="proceedToPayment" to="paymentInfo"/>
+</view-state>
+
+<view-state id="paymentInfo" view="checkout/payment">
+<on-entry>
+    <!-- Fetch payment options from a service -->
+    <evaluate expression="paymentService.getPaymentOptions()"/>
+</on-entry>
+<transition on="confirmPayment" to="confirmOrder"/>
+</view-state>
+
+<view-state id="confirmOrder" view="checkout/confirmOrder">
+<transition on="submitOrder" to="finishOrder"/>
+</view-state>
+
+<end-state id="finishOrder" view="checkout/orderComplete"/>

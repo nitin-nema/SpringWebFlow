@@ -1,0 +1,23 @@
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <!-- Step 1: Personal Details -->
+    <view-state id="personalDetails" view="jobApp/personalDetails" model="jobApplicant">
+        <transition on="next" to="jobDetails"/>
+    </view-state>
+
+    <!-- Step 2: Job Details -->
+    <view-state id="jobDetails" view="jobApp/jobDetails" model="jobApplicant">
+        <transition on="next" to="confirmation"/>
+    </view-state>
+
+    <!-- Step 3: Confirmation -->
+    <view-state id="confirmation" view="jobApp/confirmation" model="jobApplicant">
+        <transition on="submit" to="complete"/>
+    </view-state>
+
+    <!-- End of the flow -->
+    <end-state id="complete" view="jobApp/thankYou"/>
+</flow>
